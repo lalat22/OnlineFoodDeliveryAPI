@@ -46,6 +46,4 @@ public partial class User
     public virtual Role Role { get; set; } = null!;
 
     public virtual AccountStatus Status { get; set; } = null!;
-
-    
 }

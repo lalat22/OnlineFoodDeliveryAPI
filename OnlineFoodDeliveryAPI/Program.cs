@@ -1,9 +1,13 @@
+using FoodCourt.Common;
 using FoodCourt.Services;
 using FoodCourtData.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using System.Data;
+using System.Reflection;
 using System.Text;
+using static FoodCourt.Services.MenuService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -37,7 +41,12 @@ builder.Services.AddAuthentication(options =>
 });
 
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IMenuService, MenuService>();
 
+//Automapper
+builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(FoodCourtMapper)));
+// Add AutoMapper and specify the assembly where the profile is located
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
